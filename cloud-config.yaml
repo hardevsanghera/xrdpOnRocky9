@@ -21,7 +21,7 @@ users:
     lock_passwd: false
     shell: /bin/bash
     ssh_authorized_keys:
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCcKRV5hp3SvEh1BJP04wcyrp3uKsg6w/70J77ROoOjbZ2eWKku2pEhnGhf+SHeEa/gkIpq3xY7gFyKaKOMuVHgOCGabhBggFy8gngQEm0GUbjmehjyH579VS7IpJAaMrSE8NRqvcdWMw/9+Vj6t94e7grINDcKzpJIo3W5+tybLDVIFSTGWXPXrgK85qiHJ8RAn+zoCOgy/GTHTrxNVePuO+FLt89IQX/vI4+MR6Of/ZEjJnWoB64TUQl5GyD4EoKI+eFkB6RJoA5JB3Y/Bu0dhwZC1u5j7lXfvyWAqCVWYjaHs+BjvsE+Y7pLG3yrYtTZCHOluIYY408J4Uyk6o1c+eMGynqejSb1vsCEEw64y65TPzJBDDOVwEge9DKFFp30a2EdnJn2kbHDn0hfZqC2KJTZI1fPPQ1OVHBNrIuvrhcjV7SbQvAi1DHQZiqSSwT8cfvCzlLz4aPG18mnsX4kjADIRc/kdsaRJe4hasF/TZFsPABfqUyViwDdrXm4el/P2AJmf3ystl+D14uqpCw8vMgjzoX9P10mZWxObFcAdJ0I+DgjMgxZAnvYz8TtFlMmz1nyDscDpDQtf7jnoD4WZTv/h/3WLTkwPxOuJKYiIN/yKo8ubbqTeprUL9T5ZCy6iUutFEWULUpln3B1K/Lqzk6ZUVcEtLfGVRnXpU4iuQ== hardev.sanghera@nutanix.com
+      - ssh-rsa AAAA....== sample@abc.local
     sudo:
       - "ALL=(ALL) NOPASSWD:ALL"
   - name: rockyadmin
@@ -30,12 +30,12 @@ users:
     lock_passwd: false
     shell: /bin/bash
     ssh_authorized_keys:
-      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCcKRV5hp3SvEh1BJP04wcyrp3uKsg6w/70J77ROoOjbZ2eWKku2pEhnGhf+SHeEa/gkIpq3xY7gFyKaKOMuVHgOCGabhBggFy8gngQEm0GUbjmehjyH579VS7IpJAaMrSE8NRqvcdWMw/9+Vj6t94e7grINDcKzpJIo3W5+tybLDVIFSTGWXPXrgK85qiHJ8RAn+zoCOgy/GTHTrxNVePuO+FLt89IQX/vI4+MR6Of/ZEjJnWoB64TUQl5GyD4EoKI+eFkB6RJoA5JB3Y/Bu0dhwZC1u5j7lXfvyWAqCVWYjaHs+BjvsE+Y7pLG3yrYtTZCHOluIYY408J4Uyk6o1c+eMGynqejSb1vsCEEw64y65TPzJBDDOVwEge9DKFFp30a2EdnJn2kbHDn0hfZqC2KJTZI1fPPQ1OVHBNrIuvrhcjV7SbQvAi1DHQZiqSSwT8cfvCzlLz4aPG18mnsX4kjADIRc/kdsaRJe4hasF/TZFsPABfqUyViwDdrXm4el/P2AJmf3ystl+D14uqpCw8vMgjzoX9P10mZWxObFcAdJ0I+DgjMgxZAnvYz8TtFlMmz1nyDscDpDQtf7jnoD4WZTv/h/3WLTkwPxOuJKYiIN/yKo8ubbqTeprUL9T5ZCy6iUutFEWULUpln3B1K/Lqzk6ZUVcEtLfGVRnXpU4iuQ== hardev.sanghera@nutanix.com
+      - ssh-rsa AAAA....== sample@abc.local
     sudo:
       - "ALL=(ALL) NOPASSWD:ALL"
 
 chpasswd:
   list: |
-    rocky:Nutanix/4u
-    rockyadmin:Nutanix/4u
+    rocky:password
+    rockyadmin:password
   expire: false
