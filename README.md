@@ -12,11 +12,11 @@ Log in to the Rocky server with an account that has administrator privileges. If
 ssh rocky@<ROCKY_SERVER_IP>
 ```
 
-Then download and run the script:
+Then download and run the script (if no curl in your image/vm install it first or scp it in from your workstation!):
 
 ```bash
-wget https://raw.githubusercontent.com/hardevsanghera/xrdpOnRocky9/main/setup-rocky9-xrdp.sh -O setup-rocky9-xrdp.sh
-bash setup-rocky9-xrdp.sh
+curl -L https://raw.githubusercontent.com/hardevsanghera/xrdpOnRocky9/main/setup-rocky9-xrdp.sh \
+  -o setup-rocky9-xrdp.sh
 ```
 
 The script uses `sudo` when needed. After it completes, connect your RDP client to the server on TCP port 3389. Make sure your cloud firewall or security group also permits RDP access from the intended client.
