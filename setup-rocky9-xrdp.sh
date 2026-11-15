@@ -145,9 +145,10 @@ stage_two() {
     fi
 
     #Sneak in a vscode install
-    sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
+    log "Installing vscode"
+    run_root rpm --import https://packages.microsoft.com/keys/microsoft.asc &&
     echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\nautorefresh=1\ntype=rpm-md\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" | sudo tee /etc/yum.repos.d/vscode.repo > /dev/null
-    sudo dnf install --refresh code # or code-insiders
+    run_root dnf install -y --refresh code # or code-insiders
 
     log "Cleaning up the continuation service"
     run_root systemctl disable rocky-xrdp-setup.service || true
