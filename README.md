@@ -1,6 +1,7 @@
 # Rocky Linux 9 XRDP Setup
 
 `setup-rocky9-xrdp.sh` turns a Rocky Linux 9 server into a graphical workstation that you can access over RDP. It updates the system, installs the Workstation desktop, configures graphical boot and GNOME to use X11, then installs and starts `xrdp` and its Xorg integration. The setup reboots once and continues automatically after startup. If `firewalld` is active, it opens TCP port 3389.
+BONUS: Now also installs vscode :)
 
 The supplied [`cloud-config.yaml`](cloud-config.yaml) creates the `rocky` and `rockyadmin` administrator accounts and enables and starts `sshd`. It also allows SSH through `firewalld` when it is active.
 
