@@ -14,12 +14,18 @@
 # the most reliable xrdp session on Rocky Linux 9.
 # To avoid changing the GDM Wayland setting:
 #   FORCE_X11=false bash setup-rocky9-xrdp.sh
+#
+# Progress and command output are appended to:
+#   /var/log/rocky-xrdp-setup.log
+# Follow setup progress with:
+#   sudo tail -f /var/log/rocky-xrdp-setup.log
 
 set -Eeuo pipefail
 
 STATE_FILE="/var/lib/rocky-xrdp-setup.state"
 INSTALLED_SCRIPT="/usr/local/sbin/rocky-xrdp-setup.sh"
 CONTINUATION_UNIT="/etc/systemd/system/rocky-xrdp-setup.service"
+LOG_FILE="/var/log/rocky-xrdp-setup.log"
 FORCE_X11="${FORCE_X11:-true}"
 
 if [[ "${EUID}" -eq 0 ]]; then
@@ -29,7 +35,7 @@ else
 fi
 
 log() {
-    printf '\n==> %s\n' "$1"
+    printf '\n[%s] ==> %s\n' "$(date '+%Y-%m-%d %H:%M:%S%z')" "$1"
 }
 
 run_root() {
@@ -41,6 +47,16 @@ run_root() {
 }
 
 SCRIPT_PATH="$(readlink -f "${BASH_SOURCE[0]}")"
+
+start_logging() {
+    run_root install -d -m 0755 "$(dirname "${LOG_FILE}")"
+    run_root touch "${LOG_FILE}"
+    run_root chmod 0644 "${LOG_FILE}"
+    exec > >(run_root tee -a "${LOG_FILE}") 2>&1
+
+    log "Starting setup (script: ${SCRIPT_PATH}; log: ${LOG_FILE})"
+    trap 'status=$?; log "ERROR: command failed with exit ${status} at line ${LINENO}: ${BASH_COMMAND}"; exit "${status}"' ERR
+}
 
 install_continuation_service() {
     log "Installing the post-reboot continuation service"
@@ -156,10 +172,12 @@ stage_two() {
     run_root systemctl daemon-reload
     run_root rm -f "${STATE_FILE}"
 
-    echo
+    log "Setup completed successfully"
     echo "Rocky Linux Workstation and xrdp are ready."
     echo "Connect your RDP client to this VM on TCP port 3389."
 }
+
+start_logging
 
 if [[ "${1:-}" == "--resume" ]] || [[ -f "${STATE_FILE}" ]]; then
     stage_two
