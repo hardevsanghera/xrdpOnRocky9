@@ -110,6 +110,7 @@ stage_one() {
 
     log "Applying operating-system updates"
     run_root dnf clean all
+    run_root dnf makecache --refresh
     run_root dnf upgrade -y
 
     log "Installing the Workstation package group"
@@ -128,6 +129,9 @@ stage_one() {
 
 stage_two() {
     log "Applying updates after installing the Workstation group"
+    run_root dnf clean packages
+    run_root dnf clean metadata
+    run_root dnf makecache --refresh
     run_root dnf upgrade -y
 
     log "Enabling CRB and installing EPEL"
